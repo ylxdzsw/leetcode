@@ -22,38 +22,36 @@ impl ListNode {
 }
 
 fn add_two_numbers(l1: Option<Box<ListNode>>, l2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-    let mut root = ListNode::new(0);
-    let mut residual = 0;
-    let mut curr = &mut root;
-
-    let mut l = l1;
-    let mut r = l2;
-
-    loop {
-        let mut x = match (&l, &r) {
+    fn _add_two_numbers(
+        l: Option<Box<ListNode>>,
+        r: Option<Box<ListNode>>,
+        residual: i32,
+        result: &mut ListNode // pointer to the last node in the result list
+    ) {
+        let sum = match (&l, &r) {
             (Some(a), Some(b)) => a.val + b.val + residual,
             (Some(a), None) | (None, Some(a)) => a.val + residual,
-            _ => {
+            _ => { // we are done
                 if residual != 0 {
-                    curr.next = Some(Box::new(ListNode::new(residual)))
+                    result.next = Some(Box::new(ListNode::new(residual)))
                 }
-                return root.next
+                return
             }
         };
 
-        if x >= 10 {
-            residual = x / 10;
-            x %= 10
-        } else {
-            residual = 0
-        }
+        result.next = Some(Box::new(ListNode::new(sum % 10)));
 
-        curr.next = Some(Box::new(ListNode::new(x)));
-        curr = curr.next.as_mut().unwrap();
-
-        l = l.and_then(|x| x.next);
-        r = r.and_then(|x| x.next)
+        _add_two_numbers(
+            l.and_then(|x| x.next),
+            r.and_then(|x| x.next),
+            sum / 10,
+            result.next.as_mut().unwrap()
+        )
     }
+    
+    let mut root = ListNode::new(0);
+    _add_two_numbers(l1, l2, 0, &mut root);
+    root.next
 }
 
 fn main() {
