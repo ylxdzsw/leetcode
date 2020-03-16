@@ -9,14 +9,19 @@
 // Because nums[0] + nums[1] = 2 + 7 = 9,
 // return [0, 1].
 
+use std::collections::BTreeMap;
+
 fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
-    for i in 0..nums.len() {
-        for j in i+1..nums.len() {
-            if nums[i] + nums[j] == target {
-                return vec![i as _, j as _]
-            }
+    let mut complements: BTreeMap<i32, i32> = BTreeMap::new(); // complement -> index
+
+    for (i, n) in nums.iter().enumerate() {
+        let cp = target - n;
+        if let Some(j) = complements.get(&cp) {
+            return vec![*j, i as _]
         }
+        complements.insert(*n, i as _);
     }
+
     unreachable!() // the solution exists
 }
 
@@ -24,4 +29,4 @@ fn main() {
     assert!(two_sum(vec![2, 7, 11, 15], 9) == vec![0, 1])
 }
 
-// faster than 23.45%, less memory than 100.00%
+// faster than 100.00%, less memory than 100.00%
