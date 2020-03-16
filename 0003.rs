@@ -17,7 +17,6 @@
 // Explanation: The answer is "wke", with the length of 3. 
 //              Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
 
-
 fn length_of_longest_substring(s: String) -> i32 {
     let s = s.as_bytes(); // assume ASCII
     let mut max_so_far = 0;
