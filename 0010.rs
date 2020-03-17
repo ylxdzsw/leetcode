@@ -74,3 +74,4 @@ fn main() {
 }
 
 // faster than 9.09%, less memory than 100.00%.
+// we need a memory to get performance similar to DP, but Rust's mutability rule makes it cumbersome to implement.
