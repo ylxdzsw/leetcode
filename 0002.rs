@@ -54,30 +54,17 @@ fn add_two_numbers(l1: Option<Box<ListNode>>, l2: Option<Box<ListNode>>) -> Opti
     root.next
 }
 
+fn make_list(x: &[i32]) -> Option<Box<ListNode>> {
+    if x.is_empty() {
+        return None
+    }
+
+    Some(Box::new(ListNode { val: x[0], next: make_list(&x[1..]) }))
+}
 fn main() {
-    let a = Some(Box::new(ListNode {
-        val: 2, next: Some(Box::new(ListNode {
-            val: 4, next: Some(Box::new(ListNode {
-                val: 3, next: None
-            }))
-        }))
-    }));
-
-    let b = Some(Box::new(ListNode {
-        val: 5, next: Some(Box::new(ListNode {
-            val: 6, next: Some(Box::new(ListNode {
-                val: 4, next: None
-            }))
-        }))
-    }));
-
-    let r = Some(Box::new(ListNode {
-        val: 7, next: Some(Box::new(ListNode {
-            val: 0, next: Some(Box::new(ListNode {
-                val: 8, next: None
-            }))
-        }))
-    }));
+    let a = make_list(&[2, 4, 3]);
+    let b = make_list(&[5, 6, 4]);
+    let r = make_list(&[7, 0, 8]);
 
     assert_eq!(add_two_numbers(a, b), r)
 }
