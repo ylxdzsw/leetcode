@@ -34,3 +34,7 @@ This one is very funny. I first thought it was regular DP and only beat about 50
 important property: if you can get to i in x steps, you must be able to get to anywhere less than i in no more than x
 steps. This changed the whole process from "find shorted path to i" to "find farest place reachable in x steps".
 
+### 0065
+
+Its definition for "decimals" is really loose, but actually consistent with Julia's built-in parser.
+Some **valid** examples: `+2.`, `.1 `, `45.e2`
