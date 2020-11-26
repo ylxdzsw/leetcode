@@ -38,3 +38,7 @@ steps. This changed the whole process from "find shorted path to i" to "find far
 
 Its definition for "decimals" is really loose, but actually consistent with Julia's built-in parser.
 Some **valid** examples: `+2.`, `.1 `, `45.e2`
+
+### 1622
+
+This problem requires some knowledge in modulo calculation. The most important is part that we can represent a^-1 by a (large) integer a^(m-2) under mod m.
