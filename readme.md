@@ -42,3 +42,10 @@ Some **valid** examples: `+2.`, `.1 `, `45.e2`
 ### 1622
 
 This problem requires some knowledge in modulo calculation. The most important is part that we can represent a^-1 by a (large) integer a^(m-2) under mod m.
+
+### 1723
+
+- record the best result so far and terminate branch when any of the worker already reach that value;
+- place the large jobs first (by sorting the job list) to better trigger the first heuristic
+- remove redundant branches by utilizing the homogeneity of the workers. This is especially useful when k ≈ jobs.length,
+  as most likely there are multiple empty workers that are no different from each other.
